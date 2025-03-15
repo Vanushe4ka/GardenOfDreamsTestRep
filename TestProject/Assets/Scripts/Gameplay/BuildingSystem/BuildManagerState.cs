@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 class BuildManagerState : ManagerState
 {
     public BuildManagerState(BuildingManager buildingManager, Building selectedBuilding) : base(buildingManager)
@@ -19,6 +18,7 @@ class BuildManagerState : ManagerState
         {
             Object.Destroy(_selectedBuilding.gameObject);
         }
+
         _gridManager.RedrawGrid();
         _buildingManager.HideGrid();
     }

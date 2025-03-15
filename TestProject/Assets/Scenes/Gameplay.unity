@@ -153,7 +153,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _gameplayUIPrefab: {fileID: 1468038122422340764, guid: c2383f623cf6d75449052273d907bf0c, type: 3}
-  buildingManager: {fileID: 933142412}
+  _buildingManager: {fileID: 933142412}
 --- !u!4 &68634012
 Transform:
   m_ObjectHideFlags: 0
@@ -244,14 +244,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a72a7707c0909de48b730668e1d557ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buildingPrefabs:
+  _buildingPrefabs:
   - {fileID: 4607433260602449553, guid: 046346e9e2aee8c4b855af1e45ee7f36, type: 3}
   - {fileID: 7014707113408985154, guid: d87dd2e84ba2d3d4b944f9ea255501fa, type: 3}
   - {fileID: 8825166920491007727, guid: 18694d16dd5adc34a84adb8ef2d56638, type: 3}
-  matrixSize: {x: 25, y: 25}
-  visualGrid: {fileID: 1461040282}
-  tilemapGrid: {fileID: 566988370}
-  saveFilePath: buildingsSave
+  _matrixSize: {x: 25, y: 25}
+  _visualGrid: {fileID: 1461040282}
+  _tilemapGrid: {fileID: 566988370}
+  _saveFilePath: buildingsSave.json
 --- !u!4 &933142413
 Transform:
   m_ObjectHideFlags: 0
@@ -525,9 +525,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b0d1f515eb0baa44832461aba5d8a68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gridTilemap: {fileID: 1461040281}
-  freeCell: {fileID: 11400000, guid: 606e29bd7fe4ae24b9ab13154b40d1f4, type: 2}
-  ocupedCell: {fileID: 11400000, guid: abb38174eba682d45b2d424ee66b8fcc, type: 2}
+  _gridTilemap: {fileID: 1461040281}
+  _freeCell: {fileID: 11400000, guid: 606e29bd7fe4ae24b9ab13154b40d1f4, type: 2}
+  _ocupedCell: {fileID: 11400000, guid: abb38174eba682d45b2d424ee66b8fcc, type: 2}
 --- !u!1 &1661848201
 GameObject:
   m_ObjectHideFlags: 0

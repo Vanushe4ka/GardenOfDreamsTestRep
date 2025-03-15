@@ -1,52 +1,56 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
 public class BuildingManager : MonoBehaviour
 {
-    [SerializeField] private Building[] buildingPrefabs;
-    public Building[] BuildingPrefabs => buildingPrefabs;
+    [SerializeField] private Building[] _buildingPrefabs;
+    [SerializeField] private Vector2Int _matrixSize;
+    [SerializeField] private VisualGrid _visualGrid;
+    [SerializeField] private Grid _tilemapGrid;
+    [SerializeField] private string _saveFilePath;
 
-    private ManagerState _currentState;
-
-    [SerializeField] Vector2Int matrixSize;
-    [SerializeField] private VisualGrid visualGrid;
-
-    [SerializeField] private Grid tilemapGrid;
-    public GridManager gridManager { get; private set; }
-    public BuildingFactory buildingFactory { get; private set; }
+    public Building[] BuildingPrefabs => _buildingPrefabs;
 
     private Vector2Int _mouseCell;
     public Vector2Int MouseCell => _mouseCell;
 
+    private ManagerState _currentState;
+
+    public GridManager gridManager { get; private set; }
+
+    public BuildingFactory buildingFactory { get; private set; }
+
     public static readonly Color redSelectColor = new Color(1, 0, 0, 0.75f);
     public static readonly Color greenSelectColor = new Color(0, 1, 0, 0.75f);
-    [SerializeField] string saveFilePath;
-
+    
     public void Initialize()
     {
-        gridManager = new GridManager(matrixSize, tilemapGrid.cellSize, visualGrid);
+        gridManager = new GridManager(_matrixSize, _tilemapGrid.cellSize, _visualGrid);
         buildingFactory = new BuildingFactory(gridManager);
-        List<Building> loadedBuildings = LoadBuildings(saveFilePath);
+        List<Building> loadedBuildings = LoadBuildings(_saveFilePath);
         if (loadedBuildings != null && loadedBuildings.Count > 0)
         {
             gridManager.LoadBuildings(loadedBuildings);
         }
         SetNeutralState();
     }
+
     public void SetBuildState(Building building)
     {
         SetState(new BuildManagerState(this, building));
     }
+
     public void SetDestroyState()
     {
         SetState(new DestroyManagerState(this));
     }
+
     public void SetNeutralState()
     {
         SetState(new NeutralManagerState(this));
     }
+
     public void SetState(ManagerState newState)
     {
         if (_currentState != null)
@@ -57,26 +61,29 @@ public class BuildingManager : MonoBehaviour
         _currentState = newState;
         _currentState.OnEnter();
     }
+
     public void ShowGrid()
     {
-        visualGrid.gameObject.SetActive(true);
+        _visualGrid.gameObject.SetActive(true);
     }
+
     public void HideGrid()
     {
-        visualGrid.gameObject.SetActive(false);
+        _visualGrid.gameObject.SetActive(false);
     }
 
     public void OnMouseLeftClick()
     {
         _currentState.OnMouseClick();
     }
+
     public void OnMouseRightClick()
     {
         SetNeutralState();
     }
+
     public void OnMouseMove(Vector2 mousePos)
     {
-
         Vector2Int newMouseCell = gridManager.WorldToGridPoint(Camera.main.ScreenToWorldPoint(mousePos));
         if (_mouseCell != newMouseCell)
         {
@@ -85,7 +92,6 @@ public class BuildingManager : MonoBehaviour
 
         }
     }
-
 
     public void SaveBuildings(string fileName)
     {
@@ -102,6 +108,7 @@ public class BuildingManager : MonoBehaviour
                 PosInGridY = building.posInGrid.y
             });
         }
+
         SaveDataWrapper saveWrapper = new SaveDataWrapper(saveData);
         string json = JsonUtility.ToJson(saveWrapper, true);
         File.WriteAllText(Application.persistentDataPath + "/" + fileName, json);
@@ -120,9 +127,8 @@ public class BuildingManager : MonoBehaviour
 
             foreach (var data in saveData)
             {
-                // Поиск префаба по ID
                 Building foundPrefab = null;
-                foreach (var prefab in buildingPrefabs)
+                foreach (var prefab in _buildingPrefabs)
                 {
                     var buildingComponent = prefab.GetComponent<Building>();
                     if (buildingComponent != null && buildingComponent.PrefabID == data.ID)
@@ -144,12 +150,13 @@ public class BuildingManager : MonoBehaviour
                 }
             }
         }
+
         return loadedBuildings;
     }
 
     private void OnApplicationQuit()
     {
-        SaveBuildings(saveFilePath);
+        SaveBuildings(_saveFilePath);
     }
 
 }

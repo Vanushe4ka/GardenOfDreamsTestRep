@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 class GameplayUI : MonoBehaviour
 {
-    [SerializeField] private BuildingButton buildingButtonPrefab;
-    [SerializeField] private Transform buildingButtonContainer;
+    [SerializeField] private BuildingButton _buildingButtonPrefab;
+    [SerializeField] private Transform _buildingButtonContainer;
 
     private BuildingManager _buildingManager;
     private BuildingButton _selectedButton;
@@ -12,12 +12,13 @@ class GameplayUI : MonoBehaviour
         _buildingManager = buildingManager;
         InitializeBuildingButtons();
     }
+
     private void InitializeBuildingButtons()
     {
         foreach (var buildingPrefab in _buildingManager.BuildingPrefabs)
         {
-            BuildingButton button = Instantiate(buildingButtonPrefab.gameObject, buildingButtonContainer).GetComponent<BuildingButton>();
-            button.Initialize(buildingPrefab, OnBuildingSelected); 
+            BuildingButton button = Instantiate(_buildingButtonPrefab.gameObject, _buildingButtonContainer).GetComponent<BuildingButton>();
+            button.Initialize(buildingPrefab, OnBuildingSelected);
         }
     }
 
@@ -31,11 +32,13 @@ class GameplayUI : MonoBehaviour
         _selectedButton = selectedButton;
         _selectedButton.SetSelected(true);
     }
+
     public void OnBuildButtonClick()
     {
         if (_selectedButton == null || _selectedButton.building == null) { return; }
         _buildingManager.SetBuildState(_selectedButton.building);
     }
+
     public void OnDestroyButtonClick()
     {
         _buildingManager.SetDestroyState();

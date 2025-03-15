@@ -1,10 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class NeutralManagerState : ManagerState
 {
     public NeutralManagerState(BuildingManager buildingManager) : base(buildingManager) { }
+
     public override void OnEnter()
     {
         _buildingManager.HideGrid();

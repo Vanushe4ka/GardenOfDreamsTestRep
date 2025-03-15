@@ -4,40 +4,45 @@ using UnityEngine.EventSystems;
 class GameplayEntryPoint : MonoBehaviour
 {
     [SerializeField] private GameplayUI _gameplayUIPrefab;
-    [SerializeField] BuildingManager buildingManager;
+    [SerializeField] private BuildingManager _buildingManager;
+
     private GameplayUI _gameplayUI;
     private GameInput gameInput; 
+
     private bool _isOverUI;
+
     public void Initialize(UIRoot uiRoot)
     {
         gameInput = new GameInput();
         gameInput.Enable();
 
-        buildingManager.Initialize();
+        _buildingManager.Initialize();
+
         gameInput.Gameplay.LeftMouseClick.performed += context =>
         {
             if (!_isOverUI)
             {
-                buildingManager.OnMouseLeftClick();
+                _buildingManager.OnMouseLeftClick();
             }
         };
         gameInput.Gameplay.RightMouseClick.performed += context =>
         {
             if (!_isOverUI)
             {
-                buildingManager.OnMouseRightClick();
+                _buildingManager.OnMouseRightClick();
             }
         };
         gameInput.Gameplay.MousePosition.performed += context =>
         {
             Vector2 mousePos = context.ReadValue<Vector2>();
-            buildingManager.OnMouseMove(mousePos);
+            _buildingManager.OnMouseMove(mousePos);
         };
 
         _gameplayUI = Instantiate(_gameplayUIPrefab).GetComponent<GameplayUI>();
         uiRoot.SetSceneUI(_gameplayUI.transform);
-        _gameplayUI.Initialize(buildingManager);
+        _gameplayUI.Initialize(_buildingManager);
     }
+
     private void Update()
     {
         _isOverUI = IsPointerOverUI();

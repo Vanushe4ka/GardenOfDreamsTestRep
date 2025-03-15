@@ -1,12 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 public class VisualGrid : MonoBehaviour
 {
-    [SerializeField] Tilemap gridTilemap;
-    [SerializeField] TileBase freeCell;
-    [SerializeField] TileBase ocupedCell;
+    [SerializeField] private Tilemap _gridTilemap;
+    [SerializeField] private TileBase _freeCell;
+    [SerializeField] private TileBase _ocupedCell;
 
     public void DrawGrid(int[,] matrix)
     {
@@ -14,7 +12,7 @@ public class VisualGrid : MonoBehaviour
         {
             for (int x =0;x < matrix.GetLength(1); x++)
             {
-                gridTilemap.SetTile(new Vector3Int(x, y, 0), (matrix[y, x] == 0 ? freeCell : ocupedCell));
+                _gridTilemap.SetTile(new Vector3Int(x, y, 0), (matrix[y, x] == 0 ? _freeCell : _ocupedCell));
             }
         }
     }

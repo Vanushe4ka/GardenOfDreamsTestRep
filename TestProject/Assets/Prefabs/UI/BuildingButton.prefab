@@ -210,10 +210,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 635e75984f7a2d74b8fba471d528b217, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buildingImage: {fileID: 8461590528298946150}
-  button: {fileID: 3581796481247472326}
-  defaultColor: {r: 1, g: 1, b: 1, a: 1}
-  selectedColor: {r: 0.5330188, g: 1, b: 0.60606706, a: 1}
+  _buildingImage: {fileID: 8461590528298946150}
+  _button: {fileID: 3581796481247472326}
+  _defaultColor: {r: 1, g: 1, b: 1, a: 1}
+  _selectedColor: {r: 0.47970828, g: 1, b: 0.4481132, a: 1}
 --- !u!114 &4928594346581982920
 MonoBehaviour:
   m_ObjectHideFlags: 0

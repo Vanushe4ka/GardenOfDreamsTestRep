@@ -8,6 +8,7 @@ using UnityEngine;
 class DestroyManagerState : ManagerState
 {
     public DestroyManagerState(BuildingManager buildingManager) : base(buildingManager) { }
+
     public override void OnEnter()
     {
         _buildingManager.ShowGrid();
@@ -16,6 +17,7 @@ class DestroyManagerState : ManagerState
     public override void OnExit()
     {
         _buildingManager.HideGrid();
+
         if (_selectedBuilding != null)
         {
             _selectedBuilding.Unselect();
@@ -35,6 +37,7 @@ class DestroyManagerState : ManagerState
     public override void OnChangeMouseCell(Vector2Int mouseCell)
     {
         Building buildingUnderMouse = _gridManager.GetBuildingAtPoint(mouseCell);
+
         if (buildingUnderMouse != _selectedBuilding && _selectedBuilding != null)
         {
             _selectedBuilding.Unselect();
@@ -44,6 +47,7 @@ class DestroyManagerState : ManagerState
         {
             buildingUnderMouse.Select(BuildingManager.redSelectColor);
         }
+
         _selectedBuilding = buildingUnderMouse;
     }
 }

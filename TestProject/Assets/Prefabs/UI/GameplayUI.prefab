@@ -668,7 +668,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 42.8
+  m_fontSize: 42.25
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -759,8 +759,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca34e22f01954314d81a96b48e9864a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buildingButtonPrefab: {fileID: 5412851769556203220, guid: 2e6c420ebaed65341844527b4c44edc7, type: 3}
-  buildingButtonContainer: {fileID: 2630712867791388834}
+  _buildingButtonPrefab: {fileID: 5412851769556203220, guid: 2e6c420ebaed65341844527b4c44edc7, type: 3}
+  _buildingButtonContainer: {fileID: 2630712867791388834}
 --- !u!1 &6761562191523949672
 GameObject:
   m_ObjectHideFlags: 0
@@ -853,7 +853,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 42.8
+  m_fontSize: 42.25
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1

@@ -3,18 +3,23 @@ using UnityEngine;
 public class Building : MonoBehaviour
 {
     const int ORDER_LAYER_UP_SHIFT = 1000;
+
+    [SerializeField] private SpriteRenderer _spriteRenderer;
+
+    [SerializeField] private int _prefabID;
+
+    public Sprite sprite => _spriteRenderer.sprite;
+
+    public int PrefabID => _prefabID;
+
+    [HideInInspector] public Vector2Int posInGrid;
+
     [HideInInspector] public int rows = 3;
     [HideInInspector] public int columns = 3;
     [HideInInspector] public int[] matrixData; // Одномерный массив для сериализации
     public int[,] matrix { get; private set; }
-    public Vector2Int posInGrid;
-
-    [SerializeField] private SpriteRenderer _spriteRenderer;
-    public Sprite sprite => _spriteRenderer.sprite;
 
     private Color _defaultColor;
-    [SerializeField] private int _prefabID;
-    public int PrefabID => _prefabID;
 
     private void OnValidate()
     {
@@ -23,6 +28,7 @@ public class Building : MonoBehaviour
             matrixData = new int[rows * columns];
         }
     }
+
     public int[,] GetMatrix()
     {
         int[,] matrix = new int[rows, columns];
@@ -35,6 +41,7 @@ public class Building : MonoBehaviour
         }
         return matrix;
     }
+
     public void Initialize(Vector2Int posInGrid)
     {
         matrix = GetMatrix();
@@ -42,14 +49,17 @@ public class Building : MonoBehaviour
         this.posInGrid = posInGrid;
         DefineOrderLayer();
     }
+
     public void Select(Color color)
     {
         _spriteRenderer.color = color;
     }
+
     public void Unselect()
     {
         _spriteRenderer.color = _defaultColor;
     }
+
     public void DefineOrderLayer()
     {
         _spriteRenderer.sortingOrder = -posInGrid.y + ORDER_LAYER_UP_SHIFT;
